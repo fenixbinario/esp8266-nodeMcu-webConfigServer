@@ -1,0 +1,407 @@
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+	.confWifi{
+		margin:2%;
+	}
+	
+	#izqArriba{
+		margin:2%;
+		border:1px solid Gainsboro;
+		border-radius:20px;
+		width:96%;
+	}
+	
+	#titulo,#izqAbajo{
+		margin:2%;
+	}
+	
+	#menu{
+		text-align:center;
+	}
+	#menu>li{
+		display:inline;
+		padding-left:2%;
+	}
+	
+	.tRedesDisponibles{
+		font-size:0.6em;
+	}
+}
+
+@media only screen and (min-width: 769px) {
+    /* Desktop */
+	body{
+		background-color:white;
+	}
+	
+	#menu{
+		margin-top:0px;
+		padding-top:8%;
+		text-align:center;
+	}
+	
+	#menu>li{
+		padding-top:4%;
+	}
+	#izq{
+		height:100%;
+		width:16%;
+		float:left;
+		position:relative;
+		top:0px;
+		left:0px;
+		background:black;
+	}
+	
+	#drch{
+		height:100%;
+		width:84%;
+		float:left;
+	}
+
+	#izqAbajo{
+		height:85%;
+	}
+	
+	.confWifi{
+		margin-top:2%;
+		margin-left:2%;
+		margin-right:0px;
+		padding-right:0px;
+		float:left;
+		width:48%;
+	
+	}
+
+	#general,#confEstacion,#confPuntoAcceso,#confFiles{
+		width:98%;
+	}
+}
+
+*{
+	box-sizing:border-box;
+	padding:0px;
+	margin:0px;
+}
+
+body,html{
+	height:100%;
+	width:99%;
+	
+}
+
+body{
+	background-color:lightblue;
+}
+
+#izqArriba{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+	background-color:red;
+	height:80px;
+	text-align:center;
+	font-size:1.5em;
+	font-weight:bold;
+	text-shadow: 2px 2px LightSkyBlue;
+}
+#titulo{
+	display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+	text-align:center;
+	height:80px;
+	background-color:gold
+}
+
+#izqAbajo{
+	background-color:black;
+	color:gray;
+}
+
+#menu{
+	list-style: none;
+	
+}
+
+#menu>li{
+	font-size:1.3em;
+}
+
+.confWifi{
+	border:1px solid Gainsboro;
+	border-radius:20px;
+	background-color:Gainsboro;
+	padding-top:2%;
+	padding-bottom:2.5%;
+}
+
+.confWifi h1{
+	color:grey;
+	margin-left:5%;
+}
+
+.confWifi h2{
+	color:gray;
+	margin-left:5%;
+	margin-top:2%;
+}
+
+.confWifi h3{
+	color:gray;
+	margin-left:10%;
+}
+
+.tStatus{
+	width:90%;
+	margin-left:5%;
+	color:#6E6E6E;
+	font-size:1.2em;
+}
+
+.tStatus tr>td{
+	padding-top:2%;
+	width:50%;
+}
+
+.tStatus tr>td:last-child{
+	text-align:right;
+}
+
+/******************************************************************************************/
+/* Para la tabla que lista las redes disponibles, y la tabla de clientes dhcp parte común */
+/******************************************************************************************/
+
+.tablaConScroll{
+	margin-top:20px;
+	width:98%;
+	margin-left:1%;
+	box-shadow: 0 0 2px rgba(0,0,0,.4);
+	border-collapse:collapse;
+}
+
+/*div>.tablaConScroll{
+	padding:20px;
+}*/
+
+.tablaConScroll td{
+	padding-left:1%;
+	padding-right:1%;
+	float:left;
+}
+
+.tablaConScroll th{
+	padding:1%;
+	background-color:#58ACFA;
+	position:relative;
+	display:block;
+	float:left;
+	overflow:hidden;
+}
+
+.tablaConScroll>tbody{
+	overflow-y:scroll;
+	display:block;
+	height:100px;
+	width:100%;
+}
+
+.tablaConScroll tr{
+	float:left;
+	width:100%;
+}
+
+.tablaConScroll tr:hover td{
+	background-color:lightblue;
+	cursor:pointer;
+}
+
+
+/*Columnas específicas de las tablas*/
+/*Columnas para la lista de redes */
+.tRedesDisponibles td:nth-child(1){
+	text-align:left;
+	width:35%;
+}
+
+.tRedesDisponibles td:nth-child(2){
+	text-align:left;
+	width:25%;
+}
+
+.tRedesDisponibles td:nth-child(3){
+	text-align:center;
+	width:6%;
+
+}
+.tRedesDisponibles td:nth-child(4){
+	text-align:center;
+	width:19%;
+
+}
+.tRedesDisponibles td:nth-child(5){
+	text-align:center;
+	width:15%;
+}
+.trSelected{
+	color:red;
+}
+.trUnSelected{
+	color:black;
+}
+/*Fin de las columnas para la lista de redes */
+
+/*Columnas para la lista de los clientes dhcp*/
+.tDhcpClientList td{
+	text-align:left;
+	width:33%;
+}
+
+/*
+.tDhcpClientList td:nth-child(2){
+	text-align:left;
+	width:33%;
+}
+.tDhcpClientList td:nth-child(3){
+	text-align:left;
+	width:33%;
+}
+*/
+/*Fin de las columnas para la lista de los clientes dhcp*/
+
+/*Columnas para la lista del explorador de ficheros*/
+.tExploradorFich td{
+	text-align:left;
+	width:50%;
+}
+/*
+.tExploradorFich td:nth-child(1){
+	text-align:left;
+	width:50%;
+}
+
+.tExploradorFich td:nth-child(2){
+	text-align:left;
+	width:50%;
+}
+*/
+/*Fin de las columnas para la lista del explorador de ficheros*/
+
+/***************************************/
+/*Fin de la configuración de las tablas*/
+/***************************************/
+
+.boton{
+	padding:10px;
+	border-radius:10px;
+	border: 3px solid LightSlateGray;
+	/*color:blue;*/
+	color:LightSlateGray;
+	box-shadow: 4px 4px grey;
+	background-color:GreenYellow;
+	font-size:1.3em;
+	font-weight:bold;
+}
+
+.boton:active{
+	box-shadow:0px 0px;
+	position:relative;
+	top:3px;
+	left:3px;
+}
+.boton:hover{
+	cursor:pointer;
+}
+
+.seccion{
+	border-radius:10px;
+	border:1px solid black;
+	margin-left:5%;
+	width:90%;
+	/*padding-bottom:3%;*/
+	padding:20px;
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#menu>li>a{
+	text-decoration:none;
+}	
+
+#menu>li>a:visited{
+	color:white;
+}
+
+#menu>li>a:link{
+	color:white;
+}
+
+#menu>li>a:hover{
+	color:gray;
+}
+
+#menu>li>a:active{
+	color:gray;
+}
+input[type=text]{
+	border-radius:10px;
+	padding-left:10px;
+	margin-left:1%;
+	font-size:20px;
+	margin-bottom:10px;
+	width:180px;
+}
+
+input[type=text]:disabled {
+    background: #dddddd;
+}
+
+
+select {
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+	padding-left:5px;
+	padding-right:5px;
+	margin-left:5%;
+	margin-top:1%;
+	font-size:20px;
+	
+}
+
+.secondTdToRight tr>td:nth-child(2){
+	text-align:right;
+}
+
+.cDivEsperaRespuesta{
+	display: none;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+	position:absolute;
+	width:70%;
+	height:300px;
+	background-color:orange;
+	z-index:300;
+	color:DodgerBlue;
+	top:50%;
+	left:50%;
+	margin-left:-35%;
+	margin-top:-150px;
+	padding:20px;
+}
+
+.cDivBloqueaAplicacion{
+	display:block;
+	z-index:200;
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+.fontFiles{
+	color:gray;
+	font-size:1.2em;
+	font-weight:bold;
+}

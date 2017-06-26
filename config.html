@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+<title>Configuración ESP8266</title>
+<link rel="stylesheet" href="config.css">
+<script src="config.js"></script> 
+</head>
+
+<body onload="fCargaConfIni()">
+<div id="divBloqueaAplicacion" class="cDivBloqueaAplicacion">
+	<div id="divEperaRespuesta" class="seccion cDivEsperaRespuesta">
+		<h1 style="text-align:center">Esperando respuesta.</h1>
+		<h1 style="text-align:center">Si no responde recargue la página</h1>
+	</div>
+</div>
+
+<div id=izq> 
+	<div id="izqArriba" >
+		Esp8266
+	</div>
+	<div id=izqAbajo>
+		<ul id=menu>
+			<li><a href="#" onclick="fAccionMenu(1);">Inicio</a></li>
+			<li><a href="#" onclick="fAccionMenu(2);">General</a></li>
+			<li><a id=menuSta href="#" onclick="fAccionMenu(3);">Estación</a></li>
+			<li><a id=menuAp href="#" onclick="fAccionMenu(4);return false;">P.Acceso</a></li>
+			<li><a href="#" onclick="fAccionMenu(5);">Grabar</a></li>
+			<li><a href="#" onclick="fAccionMenu(6);">Ficheros</a></li>
+			<li><a href="#" onclick="fAccionMenu(7);">Restart</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id=drch>
+	<div id=titulo>
+			<h1>CONFIGURACIÓN WIFI</h1>
+	</div>
+	<div class="confWifi" id=general>
+		<h1>Estado del Wifi</h1>
+		<h3>Memoria Usada&nbsp;<span id=memUsed style="color:green"></span></h3>
+		<h3>Memoria Libre&nbsp;&nbsp;<span id=memFree style="color:green"></span></h3>
+		<h2>General</h2>
+		<div class="seccion">
+			<div style="width:98%;margin-top:2%">
+				<table class="secondTdToRight" style="margin:0 auto">
+					<tr>
+						<td style="width:40%"><h2>Estandard de red</h2></td>
+						<td>
+							
+							<select id="estandardRed">
+								<option value="b">802.11b</option>
+								<option value="g">802.11g</option>
+								<option value="n">802.11n</option>
+							</select>
+						
+						</td>
+					</tr>
+					<tr>
+						<td><h2>Modo</h2></td>
+						<td>
+							
+							<select id="modoEsp8266" value="sta">
+								<option value="sta">Estación</option>
+								<option value="ap">P.Acceso</option>
+								<option value="staAp">Esta. y P.Acceso</option>
+							</select>
+							
+						</td>
+					</tr>
+					<tr>
+						<td><h2>Sleep Type</h2></td>
+						<td>
+							
+							<select id="sleepEsp8266">
+								<option value="ns">None Sleep</option>
+								<option value="ls">Light Sleep</option>
+								<option value="ms">Modem Sleep</option>
+							</select>
+							
+						</td>
+					</tr>
+					<tr>
+						<td><h2>Vel. Uart</h2></td>
+						<td>
+							
+							<select id="uartSetupEsp8266">
+								<option value="u300">300</option>
+								<option value="u600">600</option>
+								<option value="u1200">1200</option>
+								<option value="u2400">2400</option>
+								<option value="u4800">4800</option>
+								<option value="u9600">9600</option>
+								<option value="u19200">19200</option>
+								<option value="u38400">38400</option>
+								<option value="u57600">57600</option>
+								<option value="u74880">74880</option>
+								<option value="u115200">115200</option>
+								<option value="u230400">230400</option>
+								<option value="u256000">256000</option>
+								<option value="u460800">460800</option>
+								<option value="u921600">921600</option>
+								<option value="u1843200">1843200</option>
+								<option value="u3686400">3686400</option>
+							</select>
+							
+						</td>
+					</tr>
+					<tr>
+						<td><h2>Debug</h2></td>
+						<td>
+							
+							<select id="debugEsp8266">
+								<option value="file">Fichero</option>
+								<option value="uart">Pantalla</option>
+								<option value="uartFile">Ambos</option>
+								<option value="nd">Ninguno</option>
+							</select>
+							
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div style="text-align:center">
+				<span class="boton" onclick="fCambiarGeneral()">Cambiar</span>
+			</div>
+			<br>
+		</div>
+	</div>
+	<div class="confWifi" id="generalEstacion">
+		<h2>Estación <span id=generalStaStatus>(Activado)</h2></h2>
+		<div class="seccion">
+			<table class="tStatus">
+				<tr>
+					<td>Red Configurada</td>
+					<td id=staConfNetwork></td>
+				</tr>
+				<tr>
+					<td>Estatus</td>
+					<td id=staStatus></td>
+				</tr>
+				<tr>
+					<td>DHCP Auto ip</td>
+					<td id=staDHCP></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td id=staAddress></td>
+				</tr>
+				<tr>
+					<td>Netmask</td>
+					<td id=staNetmask></td>
+				</tr>
+				<tr>
+					<td>Gateway</td>
+					<td id=staGateway></td>
+				</tr>
+				<tr>
+					<td>Rssi</td>
+					<td id=staRssi></td>
+				</tr>
+				
+				<tr>
+					<td>Mac</td>
+					<td id=staMac></td>
+				</tr>
+				<tr>
+					<td>Host Name</td>
+					<td id=staHostName></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="confWifi" id="generalPuntoAcceso">
+		<h2>Punto Acceso <span id=generalApStatus>(Activado)</span></h2>
+		<div class="seccion">
+			<table class="tStatus">
+				<tr>
+					<td>Seguridad</td>
+					<td id=apSecurity></td>
+				</tr>
+				<tr>
+					<td>SSID</td>
+					<td id=apSsid></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td id=apPassword></td>
+				</tr>
+				<tr>
+					<td>Ip</td>
+					<td id=apIp></td>
+				</tr>
+				<tr>
+					<td>Netmask</td>
+					<td id=apNetmask></td>
+				</tr>
+				<tr>
+					<td>Gateway</td>
+					<td id=apGateway></td>
+				</tr>
+				<tr>
+					<td>Mac</td>
+					<td id=apMac></td>
+				</tr>
+				<tr>
+					<td>Visible</td>
+					<td id=apVisible></td>
+				</tr>
+				
+				<tr>
+					<td>Canal</td>
+					<td id=apCanal></td>
+				</tr>
+				<tr>
+					<td>Max. Conexiones</td>
+					<td id=apMaxConn></td>
+				</tr>
+				<tr>
+					<td>DHCP Empiece</td>
+					<td id=apDhcpStart></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class="confWifi" id="confPuntoAcceso" style="display:none">
+		<h1>Punto Acceso</h1>
+		<div class="seccion">
+			<div style="margin-top:2%;width:98%">
+				<table class="secondTdToRight" style="margin:0 auto">
+					<tr>
+						<td style="width:60%;padding-bottom:10px"><h2>Seguridad</h2></td>
+						<td style="text-align:right;padding-bottom:10px">
+							<select id="selApSecurity">
+								<option value="OPEN">Open</option>
+								<option value="WPA_PSK">Wpa</option>
+								<option value="WPA2_PSK">Wpa2</option>
+								<option value="WPA_WPA2_PSK">Wpa y Wpa2</option>
+							</select>
+						</td>
+						
+					</tr>
+					<tr>
+						<td><h2>SSID</h2></td>
+						<td><input type=text id="txtApSsid" maxlength=20></td>
+					</tr>
+					
+					<tr>
+						<td><h2>Password</h2></td>
+						<td><input type=text id="txtApPassword" maxlength=20></td>
+					</tr>
+					<tr>
+						<td style="padding-bottom:10px"><h2>Max.Conn.</h2></td>
+						<td style="padding-bottom:10px">
+							<select id="selApMaxCon">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-bottom:10px"><h2>Visible</h2></td>
+						<td style="padding-bottom:10px">
+							<select id="selApVisible">
+								<option value="Si">Si</option>
+								<option value="No">No</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-bottom:10px"><h2>Canal</h2></td>
+						<td style="padding-bottom:10px">
+							<select id="selApCanal">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><h2>Mac</h2></td>
+						<td><input type=text id="txtApMac" maxlength=17></td>
+					</tr>
+					<tr>
+						<td><h2>Ip</h2></td>
+						<td><input type=text id="txtApIp" maxlength=17></td>
+					</tr>
+					<tr>
+						<td><h2>Netmask</h2></td>
+						<td><input type=text id="txtApNetmask" maxlength=17></td>
+					</tr>
+					<tr>
+						<td><h2>Gateway</h2></td>
+						<td><input type=text id="txtApGateway" maxlength=17></td>
+					</tr>
+					<tr>
+						<td><h2>Dhcp Ini</h2></td>
+						<td><input type=text id="txtApDhcpIni" maxlength=17></td>
+					</tr>
+				</table>
+				<br>
+				<div style="text-align:center">
+					<span class=boton onclick="fCambiarApParam()">Cambiar</span>	
+				</div>
+				<br>
+			</div>
+		</div>
+		<br>
+		<br>
+		<h2>Lista Clientes DHCP</h2>
+		
+		<div class="seccion">
+			<span class="boton" style="margin-left:2%" onclick="fConfApActualizaDhcpClients()">Actualizar</span>
+			<div style="margin-bottom:20px;margin-left:1%">
+				<table class="tDhcpClientList tablaConScroll" > 
+					<thead>
+						<th style="text-align:left;width:33%">ESTATUS</th>
+						<th style="text-align:left;width:33%">MAC</th>
+						<th style="text-align:left;width:33%">IP</th>
+					</thead>
+					<tbody id=tDhcpClientList>
+						<tr>
+							<td>Buscando</td>
+							<td>...</td>
+							<td>...</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="clear:both"></div>
+			<div style="margin-top:30px;margin-left:2%">
+				<span class="boton"  onclick="fConfApAnadeMac()">Añadir MAC</span>
+				<span style="margin-left:10px" class="boton"  onclick="fConfApRemoveMac()">Quitar</span>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="confWifi" id="confEstacion" style="display:none">
+		<h1>Conectar a red</h1>
+		<div class="seccion">
+			<div style="width:98%;margin-top:2%">
+				<table class="secondTdToRight" style="margin:0 auto">
+					<tr>
+						<td style="width:60%"><h2>Hostname</h2></td>
+						<td><input type=text id="txtStaHostname" maxlength=15></td>
+					</tr>
+					<tr>
+						<td><h2>Mac</h2></td>
+						<td><input type=text id="txtStaMac" maxlength=17></td>
+					</tr>
+					<tr><td colspan=2 style="padding-top:10px"><h3><input type="checkbox" id="checkStaConfIpAuto" checked onclick="fConfStaCheckIpAuto()"> <label for="checkStaConfIpAuto">Obtener Ip por Dhcp</label></h3></td></tr>
+					<tr>
+						<td><h2>Ip</h2></td>
+						<td><input type=text id="txtStaIp" maxlength=15></td>
+					</tr>
+					<tr>
+						<td><h2>Netmask</h2></td>
+						<td><input type=text id="txtStaNetmask" maxlength=15></td>
+					</tr>
+					<tr>
+						<td><h2>Gateway</h2></td>
+						<td><input type=text id="txtStaGateway" maxlength=15"></td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div style="text-align:center">
+				<span class="boton" onclick="fCambiarEstacionParam()">Cambiar</span>		
+			</div>
+			<br>
+		</div>
+		<h2>Redes disponibles</h2>
+		<div class="seccion">
+			<span class="boton" style="margin-left:1%" onclick="fActualizaListaAps()">Scanear</span>
+			<table class="tRedesDisponibles tablaConScroll"> 
+				<thead>
+					<th style="text-align:left;width:35%">SSID</th>
+					<th style="text-align:left;width:25%">BSSID</th>
+					<th style="text-align:center;width:6%">RSSI</th>
+					<th style="text-align:center;width:19%">AUTHMODE</th>
+					<th style="text-align:center;width:15%">CANAL</th>
+				</thead>
+				<tbody id=tRedesDisponibles>
+					<tr>
+						<td>Buscando</td>
+						<td>...</td>
+						<td>...</td>
+						<td>...</td>
+						<td>...</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="clear:both"></div>
+			<div>
+				<h2 style="margin-left:1%;margin-bottom:10px">Password:<input type=text id="cTxtConfPassword"></h2>
+				<span class=boton style="margin-left:1%" onclick="fConfStaConnect()">Conectar</span>			
+			</div>
+		</div>
+		<br>
+	</div>
+	<div style="clear:both"></div>
+	<div class="confWifi" id="confFiles" style="display:none;height:200px">
+		<h1>Gestión de Ficheros</h1>
+		<h2>Subir Fichero</h2>
+		<div class=seccion style="padding:20px;">
+			<div style="width:98%;margin-top:2%">
+				<table class="secondTdToRight fontFiles" style="margin:0 auto;width:290px">
+					<tr>
+						<td class="fontFiles" colspan=2><input type="file" id="upLoadfiles" name="file" multiple /></td>
+					</tr>
+					
+					<tr>
+						<td colspan=2 class="fontFiles" id="nameUploadFile">Progreso de subida:</td>
+						<!--<td class="fontFiles"><span id=porcentajeFichAct></span></td>-->
+					</tr>
+					<tr>
+						<td class="fontFiles" colspan=2><progress style="width:100%" id="fileProgressAct" value="0" max="100" ></progress></td>
+					</tr>
+					<tr>
+						<td class="fontFiles" colspan=2><progress style="width:100%" id="fileProgressTot" value="0" max="100" ></progress></td>
+					</tr>
+					<tr>
+						<td class="fontFiles" style="width:50%;text-align:center"><span id=porcentajeFichAct>&nbsp;</span></td>
+						<td class="fontFiles" style="width:50%;text-align:center"><span id=porcentajeFichTotal>&nbsp;</span></td>
+					</tr>
+					<tr>
+						<td class="fontFiles" colspan=2><input id="fileSobreescribe" type="checkbox">Sobreescribir</td>
+					</tr>
+				</table>
+				<div style="text-align:center;margin-top:20px;margin-bottom:20px">
+					<span class=boton id=sendFileButton onclick="fsendFile()">Upload</span>
+				</div>
+			</div>
+		</div>
+		<h2>Explorador de ficheros</h2>
+		<div class=seccion style="padding:20px;">
+			<span class="boton" style="margin-left:1%" onclick="fListFiles(false)">Actualizar</span>
+			<span class=boton style="margin-left:1%" onclick="fcompileFileAll()">Compilar Todo</span>
+			<div style="width:98%;margin-top:2%">
+				<table class="tExploradorFich tablaConScroll" > 
+					<thead>
+						<th style="text-align:left;width:50%">Nombre</th>
+						<th style="text-align:left;width:50%">Tamaño</th>
+					</thead>
+					<tbody id=tExploradorFich>
+						<tr>
+							<td>Actualizando</td>
+							<td>...</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div style="text-align:center">
+			<br>
+			<span class=boton style="margin-left:1%" onclick="fcompileFile()">Compilar</span>
+			
+			<span class=boton style="margin-left:1%" onclick="fejecuteFile()">Ejecutar</span>
+			<span class=boton style="margin-left:1%" onclick="frenameFile()">Renombrar</span>
+			<span class=boton style="margin-left:1%" onclick="fdeleteFile()">Borrar</span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

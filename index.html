@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  
+/* ============================================================
+  COMMON
+============================================================ */
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ============================================================
+  SWITCH 1 - ROUND
+============================================================ */
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: 120px;
+  height: 60px;
+  background-color: #dddddd;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+}
+input.cmn-toggle-round + label:before, input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: #f1f1f1;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+  -webkit-transition: background 0.4s;
+  -moz-transition: background 0.4s;
+  -o-transition: background 0.4s;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: 58px;
+  background-color: #fff;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-transition: margin 0.4s;
+  -moz-transition: margin 0.4s;
+  -o-transition: margin 0.4s;
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: #8ce196;
+	
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: 60px;
+}
+  </style>
+  <script>
+	function fPulsaTodos(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				if (xhttp.responseText=="OK,ALL_ON"){
+					//document.getElementById('bTodos').checked=true;
+					setStatusButtons(true,true);
+				}else{
+					if (xhttp.responseText=="OK,ALL_OFF"){
+						//document.getElementById('bTodos').checked=false;
+						setStatusButtons(false,false);
+					}
+				}
+				/*if (document.getElementById('bTodos').checked) {
+					
+					document.getElementById('rele1').checked=true;
+					document.getElementById('rele2').checked=true;
+				}else{
+					setStatusButtons(false,false)
+					document.getElementById('rele1').checked=false;
+					document.getElementById('rele2').checked=false;
+				}*/
+			}
+		};
+		if (document.getElementById('bTodos').checked)
+			xhttp.open("GET", "/ALL_ON", true);
+		else
+			xhttp.open("GET", "/ALL_OFF", true);
+		document.getElementById('bTodos').checked=!document.getElementById('bTodos').checked;
+		xhttp.send();
+	}
+	
+	//rele debe ser 1 o el 2
+	function fRele(releNum){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				if (xhttp.responseText=="OK,ON"+releNum){
+					document.getElementById('rele'+releNum).checked=true;
+				}else{
+					if (xhttp.responseText=="OK,OFF"+releNum){
+						document.getElementById('rele'+releNum).checked=false;
+					}
+				}
+				actualizaBotonTodos();
+			}
+		};
+		if (document.getElementById('rele'+releNum).checked)
+			xhttp.open("GET", "/ON"+releNum, true);
+		else
+			xhttp.open("GET", "/OFF"+releNum, true);
+		
+		xhttp.send();		
+		document.getElementById('rele'+releNum).checked=!document.getElementById('rele'+releNum).checked;
+	}
+	
+	//si están los dos a true el botón todos estará encendido
+	function actualizaBotonTodos(){
+		setStatusButtons(document.getElementById('rele1').checked,document.getElementById('rele2').checked);
+	}
+	
+	//coloca los botones en el estado indicado y se actualiza el botón todos, si están todos activados
+	function setStatusButtons(sta1,sta2){
+		document.getElementById('rele1').checked=sta1;
+		document.getElementById('rele2').checked=sta2;
+		if (sta1 && sta2)
+			document.getElementById('bTodos').checked=true;
+		else	
+			document.getElementById('bTodos').checked=false;
+	}
+	
+  </script>
+</head>
+<body onload="setStatusButtons(LUA_STATUS_OUTPUT1,LUA_STATUS_OUTPUT2)">
+	<div style="text-align:center">
+		<h1>Estatus Reles</h1>
+		<!--<img src="/foto.png">-->
+		<table style="margin:0 auto">
+			<tr>
+				<td><h1>Rele 1</h1></td>
+				<td style="padding-left:4%">
+					<input id="rele1" class="cmn-toggle cmn-toggle-round" onclick="fRele(1)" type="checkbox">
+					<label for="rele1"></label>
+				</td>
+			</tr>
+			<tr>
+				<td><h1>Ventilador A.C.</h1></td>
+				<td style="padding-left:4%">
+					<input id="rele2" class="cmn-toggle cmn-toggle-round" onclick="fRele(2)" type="checkbox">
+					<label for="rele2"></label>
+				</td>
+			</tr>
+			<tr>
+				<td><h1>Todos</h1></td>
+				<td style="padding-left:4%">
+					<input id="bTodos" class="cmn-toggle cmn-toggle-round" onclick="fPulsaTodos()" type="checkbox">
+					<label for="bTodos"></label>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
