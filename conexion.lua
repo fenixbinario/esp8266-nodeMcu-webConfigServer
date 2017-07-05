@@ -34,8 +34,10 @@ M.configuraStation=function()
     end
     
     --Nos conectamos al punto de acceso, o lo intentamos
-    wifi.sta.config(CONF_WIFI["STA"]["STA_SSID"],CONF_WIFI["STA"]["STA_PASSWORD"])
-    wifi.sta.connect()
+    if CONF_WIFI["STA"]["STA_SSID"]~="" then
+        wifi.sta.config(CONF_WIFI["STA"]["STA_SSID"],CONF_WIFI["STA"]["STA_PASSWORD"])
+        wifi.sta.connect()
+    end 
 end
 
 --Configuración del esp8266 para convertirlo en punto de acceso
@@ -232,7 +234,13 @@ M.configuraGeneral=function()
         wifi.setmode(wifi.STATIONAP)
         M.configuraStation()
         M.configuraAp()
-        M.montaServidor()
+        --Me han cambiado a modo Estación y Punto de Acceso. Si no tengo todavía un SSID
+        --no intento conectarme en modo estación. Sigo dejando del modo AP
+        if CONF_WIFI["STA"]["STA_SSID"]~="" then
+            M.montaServidor()
+        else
+            servidor.iniciarServidor(80)
+        end
         --NULLMODE no puedo ser, es tontería
     --elseif CONF_WIFI["GENERAL"]["WIFI_MODE"]=="null" then
     --    wifi.setmode(wifi.NULLMODE)

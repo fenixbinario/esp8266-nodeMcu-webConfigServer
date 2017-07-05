@@ -5,15 +5,15 @@ _G[moduleName] = SERVIDOR
 
 --Creación del servidor
 local srv=net.createServer(net.TCP)
-local activo
 
 SERVIDOR.detieneServidor=function()
     srv:close()
+    debug("Servidor Cerrado")
 end
 
 --iniciarServidor = function (puerto)
 SERVIDOR.iniciarServidor=function(puerto)
-
+	
 	--esta variable me va a indicar si ya he llamado a la función socket1:send y si ha terminado
     local estoyEnviandoAlgo=false
 
